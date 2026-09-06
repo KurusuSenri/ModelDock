@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+
+.DS_Store
+
+__pycache__/
+*.py[cod]
+
+mariadb/mariadb_data/*
+flask/app/*.db
+shared_data/resources/models/*
+shared_data/resources/results/*
+shared_data/resources/csvs/*
+
+test/*.onnx
+test/*.pkl

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Model Registration</title>
+    <!-- JS 动态加载页首 -->
+    <div id="pageHeader"></div>
+    <script src="/js/global.js"></script>
+    <script src="/js/register_model.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+  </head>
+  <body>
+    <h1>上传模型到系统</h1>
+
+    <form id="uploadForm">
+      <label>
+        模型文件 (Base64)：
+        <input type="file" id="modelFile" required />
+      </label>
+      <br /><br />
+
+      <label>
+        模型返回标签 (JSON)：
+        <input
+          type="text"
+          id="modelLabel"
+          placeholder='{"0":"background","1":"foreground"}'
+          required
+        />
+      </label>
+      <br /><br />
+
+      <label>
+        模型列名 (JSON Array)：
+        <input
+          type="text"
+          id="modelColumn"
+          placeholder='["ABC", "DEF"]'
+          required
+        />
+      </label>
+      <br /><br />
+
+      <label>
+        模型描述：
+        <input type="text" id="modelDesc" required />
+      </label>
+      <br /><br />
+
+      <label>
+        模型类型：
+        <select id="modelType" required>
+          <option value="PYTORCH">PYTORCH</option>
+          <option value="SKLEARN">SKLEARN</option>
+        </select>
+      </label>
+      <br /><br />
+
+      <label>
+        Pipeline 文件 (可选, Base64)：
+        <input type="file" id="pipelineFile" />
+      </label>
+      <br /><br />
+
+      <button type="submit">上传模型</button>
+    </form>
+
+    <pre id="response"></pre>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+pika
+pandas
+pandoc
+numpy
+scikit-learn
+scipy
+seaborn
+skl2onnx
+onnxruntime
+joblib
+onnx
+torch
+pymysql

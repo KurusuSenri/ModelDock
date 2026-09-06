@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Model Info</title>
+    <!-- JS 动态加载页首 -->
+    <div id="pageHeader"></div>
+    <script src="/js/global.js"></script>
+    <script src="/js/model_info.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+  </head>
+  <body>
+    <h1>模型详情</h1>
+    <a id="delete_model" href="">删除该模型</a>
+    <a id="create_task" href="">使用该模型新建任务</a>
+    <div id="error" class="error" style="display: none"></div>
+    <table id="modelsTable">
+      <thead>
+        <tr>
+          <th>字段</th>
+          <th>值</th>
+        </tr>
+      </thead>
+      <tbody id="modelDetailTableBody">
+        <tr>
+          <td>模型 ID</td>
+          <td id="model_id"></td>
+        </tr>
+        <tr>
+          <td>类型</td>
+          <td id="model_type"></td>
+        </tr>
+        <tr>
+          <td>描述</td>
+          <td id="model_desc"></td>
+        </tr>
+        <tr>
+          <td>日期</td>
+          <td id="model_date"></td>
+        </tr>
+        <tr>
+          <td>列名</td>
+          <td id="model_column"></td>
+        </tr>
+        <tr>
+          <td>标签</td>
+          <td id="model_label"></td>
+        </tr>
+      </tbody>
+    </table>
+    <h1>关联的任务</h1>
+    <table id="tasksTable">
+      <thead>
+        <tr>
+          <th>任务 ID</th>
+          <th>任务状态</th>
+          <th>任务描述</th>
+          <th>任务注册时间</th>
+          <th>任务结束时间</th>
+        </tr>
+      </thead>
+      <tbody id="tasksTableBody">
+        <!-- 数据将通过JS动态填充 -->
+      </tbody>
+    </table>
+  </body>
+</html>

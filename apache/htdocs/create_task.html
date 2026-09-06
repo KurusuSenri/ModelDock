@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Task Creation</title>
+    <!-- JS 动态加载页首 -->
+    <div id="pageHeader"></div>
+    <script src="/js/global.js"></script>
+    <script src="/js/create_task.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+  </head>
+  <body>
+    <h1>创建新任务</h1>
+
+    <form id="uploadForm">
+      <label>
+        CSV 文件 (Base64)：
+        <input type="file" id="task_csv" required />
+      </label>
+      <br /><br />
+
+      <label>
+        模型 ID：
+        <input
+          type="text"
+          id="model_id"
+          required
+        />
+      </label>
+      <br /><br />
+
+      <label>
+        任务描述：
+        <input
+          type="text"
+          id="task_desc"
+          required
+        />
+      </label>
+      <br /><br />
+
+      <button type="submit">新建任务</button>
+    </form>
+
+    <pre id="response"></pre>
+  </body>
+</html>

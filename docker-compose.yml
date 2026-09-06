@@ -1,0 +1,89 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS:?Set RABBIT_PASS in .env}
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  mariadb:
+    image: mariadb:11.4
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD in .env}
+      MARIADB_DATABASE: database
+      MARIADB_USER: user
+      MARIADB_PASSWORD: ${DB_PASS:?Set DB_PASS in .env}
+      DEMO_USER: ${DEMO_USER:?Set DEMO_USER in .env}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?Set DEMO_PASSWORD in .env}
+    volumes:
+      - ./mariadb/mariadb_data:/var/lib/mysql
+      - ./mariadb/init.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./mariadb/init.sh:/docker-entrypoint-initdb.d/02-create-demo-user.sh:ro
+
+  apache:
+    image: httpd:2.4
+    container_name: apache_server
+    ports:
+      - "8080:80"
+    volumes:
+      - ./apache/htdocs:/usr/local/apache2/htdocs/
+      - ./apache/extra.conf:/usr/local/apache2/conf.d/extra.conf:ro
+  flask:
+    build: ./flask
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_APP: app.py
+      FLASK_DEBUG: 1
+      PYTHONUNBUFFERED: 1
+      FLASK_RUN_HOST: 0.0.0.0
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_NAME: database
+      DB_USER: user
+      DB_PASS: ${DB_PASS:?Set DB_PASS in .env}
+      RABBIT_HOST: rabbitmq
+      RABBIT_USER: user
+      RABBIT_PASS: ${RABBIT_PASS:?Set RABBIT_PASS in .env}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+    volumes:
+      - ./flask/app:/app
+      - ./shared_data/resources:/app/resources
+    depends_on:
+      - mariadb
+      - rabbitmq
+
+  worker:
+    build: ./worker
+    container_name: worker
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_USER: user
+      RABBIT_PASS: ${RABBIT_PASS:?Set RABBIT_PASS in .env}
+      PYTHONUNBUFFERED: 1
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_NAME: database
+      DB_USER: user
+      DB_PASS: ${DB_PASS:?Set DB_PASS in .env}
+    volumes:
+      - ./worker/app:/app
+      - ./shared_data/resources:/app/resources
+    depends_on:
+      - mariadb
+      - rabbitmq
+    

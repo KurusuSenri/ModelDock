@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Task Info</title>
+  <!-- JS 动态加载页首 -->
+  <div id="pageHeader"></div>
+  <script src="/js/global.js"></script>
+  <script src="/js/task_info.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="/css/global.css" />
+</head>
+
+<body>
+  <h1>任务详情</h1>
+  <a id="delete_task" href="">删除该任务</a>
+  <div id="error" class="error" style="display: none"></div>
+  <table id="taskTable">
+    <thead>
+      <tr>
+        <th>字段</th>
+        <th>值</th>
+      </tr>
+    </thead>
+    <tbody id="tasksTableBody">
+      <!-- 数据将通过JS动态填充 -->
+      <tr>
+        <td>任务 ID</td>
+        <td id="task_id"></td>
+      </tr>
+
+      <tr>
+        <td>任务描述</td>
+        <td id="task_desc"></td>
+      </tr>
+      <tr>
+        <td>任务状态</td>
+        <td id="status"></td>
+      </tr>
+      <tr>
+        <td>使用的模型</td>
+        <td id="model_id"></td>
+      </tr>
+      <tr>
+        <td>任务标签</td>
+        <td id="model_label"></td>
+      </tr>
+      <tr>
+        <td>错误信息</td>
+        <td id="error_message"></td>
+      </tr>
+      <tr>
+        <td>任务开始时间</td>
+        <td id="start_date"></td>
+      </tr>
+      <tr>
+        <td>任务结束时间</td>
+        <td id="end_date"></td>
+      </tr>
+      <tr>
+        <td>任务结果</td>
+        <td id="result"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

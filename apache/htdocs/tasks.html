@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tasks</title>
+    <!-- JS 动态加载页首 -->
+    <div id="pageHeader"></div>
+    <script src="/js/global.js"></script>
+    <script src="/js/tasks.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+  </head>
+  <body>
+    <h1>任务列表</h1>
+    <div id="error" class="error" style="display: none"></div>
+    <table id="modelsTable">
+      <thead>
+        <tr>
+          <th>任务 ID</th>
+          <th>任务描述</th>
+          <th>任务结果</th>
+          <th>模型 ID</th>
+          <th>错误信息</th>
+          <th>开始日期</th>
+          <th>结束日期</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- 数据将通过JS动态填充 -->
+      </tbody>
+    </table>
+  </body>
+</html>
